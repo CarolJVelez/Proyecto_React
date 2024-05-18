@@ -14,7 +14,8 @@ function GitHubUser() {
             setUserData(info);
 
             const respuestaRepositorio = await fetch(info.repos_url);
-            const infoReposi = await respuestaRepositorio.json();
+            let infoReposi = await respuestaRepositorio.json();
+            infoReposi = infoReposi.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
             setRepos(infoReposi);
         } catch (error) {
             console.error('No se pudieron obtener datos del usuario: ' + nombreUsuario, error);
@@ -42,9 +43,9 @@ function GitHubUser() {
           <p><strong id='textoInicial'>Repositorios publicos:</strong> {datosUsuario.public_repos}</p>
           <h3>Repositorios Recientes:</h3>
           <ul className='listaRepositorio'>
-            {repositoriosRecientes.slice(1).map((repositorio) => (
+            {repositoriosRecientes.slice(0,5).map((repositorio) => (
               <li key={repositorio.id}>
-                <strong id='textoInicial'>{repositorio.name}</strong>
+                <strong id='textoInicial'>{repositorio.name}</strong>: {repositorio.description}
               </li>
             ))}
           </ul>
