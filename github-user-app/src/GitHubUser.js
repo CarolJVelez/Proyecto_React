@@ -9,7 +9,7 @@ function GitHubUser() {
     //Funcion para obtener datos del usuario
     const buscarDatosUsuario = async () => {
         try {
-            const respuesta = await fetch(`url`);
+            const respuesta = await fetch(`https://api.github.com/users/${nombreUsuario}`);
             const info = await respuesta.json();
             setUserData(info);
 
@@ -22,6 +22,7 @@ function GitHubUser() {
     };
 
     return (
+        //Input y boton submit
         <div>
             <div className="contenedor">
                 <input
@@ -32,6 +33,13 @@ function GitHubUser() {
                 />
                 <button type="submit" onClick={buscarDatosUsuario}>Obtener Datos</button>
             </div>
+            {datosUsuario && (
+        <div>
+          <h2>{datosUsuario.name}</h2>
+          <img className="imagenperfil" src={datosUsuario.avatar_url} alt="fotoPerfil" />
+          
+        </div>
+      )}
 
         </div>
     );
