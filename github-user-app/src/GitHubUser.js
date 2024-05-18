@@ -4,7 +4,7 @@ function GitHubUser() {
     //Declaracion de variables
     const [nombreUsuario, setUsername] = useState('');//usuarioGithub
     const [datosUsuario, setUserData] = useState(null);//datos del usuarioGithub
-    const [repositorio, setRepos] = useState([]);//lista
+    const [repositoriosRecientes, setRepos] = useState([]);//lista
 
     //Funcion para obtener datos del usuario
     const buscarDatosUsuario = async () => {
@@ -35,12 +35,19 @@ function GitHubUser() {
             </div>
             {datosUsuario && (
         <div>
-          <h2>{datosUsuario.name}</h2>
+          <h2><strong id='textoInicial'>Repositorio de: </strong>{datosUsuario.name}</h2>
           <img className="imagenperfil" src={datosUsuario.avatar_url} alt="fotoPerfil" />
           <p>{datosUsuario.bio}</p>
-          <p>Seguidores: {datosUsuario.followers}</p>
-          <p>Repositorios publicos: {datosUsuario.public_repos}</p>
+          <p><strong id='textoInicial'>Seguidores: </strong>{datosUsuario.followers}</p>
+          <p><strong id='textoInicial'>Repositorios publicos:</strong> {datosUsuario.public_repos}</p>
           <h3>Repositorios Recientes:</h3>
+          <ul className='listaRepositorio'>
+            {repositoriosRecientes.slice(1).map((repositorio) => (
+              <li key={repositorio.id}>
+                <strong id='textoInicial'>{repositorio.name}</strong>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
