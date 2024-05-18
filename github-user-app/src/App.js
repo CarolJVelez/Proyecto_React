@@ -1,4 +1,7 @@
 import './App.css';
+import React from 'react';
+import GitHubUser from './GitHubUser';
+import './App.css';
 
 function App() {
   return (
