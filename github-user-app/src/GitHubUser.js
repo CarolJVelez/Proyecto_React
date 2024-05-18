@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
 
 function GitHubUser() {
-  //Declaracion de variables
-  const [nombreUsuario, setUsername] = useState('');//usuarioGithub
-  const [datosUsuario, setUserData] = useState(null);//datos del usuarioGithub
-  const [repositorio, setRepos] = useState([]);//lista
+    //Declaracion de variables
+    const [nombreUsuario, setUsername] = useState('');//usuarioGithub
+    const [datosUsuario, setUserData] = useState(null);//datos del usuarioGithub
+    const [repositorio, setRepos] = useState([]);//lista
 
-  const buscarDatosUsuario = async () => {
-    try {
-      const respuesta = await fetch(`url`);
-      const info = await respuesta.json();
-      setUserData(info);
+    //Funcion para obtener datos del usuario
+    const buscarDatosUsuario = async () => {
+        try {
+            const respuesta = await fetch(`url`);
+            const info = await respuesta.json();
+            setUserData(info);
 
-      const respuestaRepositorio = await fetch(info.repos_url);
-      const infoReposi = await respuestaRepositorio.json();
-      setRepos(infoReposi);
-    } catch (error) {
-      console.error('No se pudieron obtener datos del usuario: ' + nombreUsuario , error);
-    }
-  };
+            const respuestaRepositorio = await fetch(info.repos_url);
+            const infoReposi = await respuestaRepositorio.json();
+            setRepos(infoReposi);
+        } catch (error) {
+            console.error('No se pudieron obtener datos del usuario: ' + nombreUsuario, error);
+        }
+    };
+
+    return (
+        <div>
+            <div className="contenedor">
+                <input
+                    type="text"
+                    value={nombreUsuario}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Ingrese el nombre de usuario"
+                />
+                <button type="submit" onClick={buscarDatosUsuario}>Obtener Datos</button>
+            </div>
+
+        </div>
+    );
+
+
 }
-  export default GitHubUser;
+export default GitHubUser;
