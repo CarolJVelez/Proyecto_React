@@ -37,7 +37,10 @@ function GitHubUser() {
         <div>
           <h2>{datosUsuario.name}</h2>
           <img className="imagenperfil" src={datosUsuario.avatar_url} alt="fotoPerfil" />
-          
+          <p>{datosUsuario.bio}</p>
+          <p>Seguidores: {datosUsuario.followers}</p>
+          <p>Repositorios publicos: {datosUsuario.public_repos}</p>
+          <h3>Repositorios Recientes:</h3>
         </div>
       )}
 
